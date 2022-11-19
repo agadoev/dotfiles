@@ -3,6 +3,11 @@
 # Session Name
 session="advertisers"
 
+createWindow() {
+	tmux new-window
+	tmux rename-window $1 # 1
+}
+
 tmux new-session -d -s $session
 
 # create frontend window
