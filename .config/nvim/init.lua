@@ -22,24 +22,27 @@ require('plugins/nvim-tree')
 require('plugins/toggleterm')
 require('plugins/lspconfig')
 
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+require('nightfox').setup{}
+
+set.termguicolors = true
+vim.cmd("colorscheme nordfox")
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
-
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- Colorscheme
+  use "EdenEast/nightfox.nvim"
 
   -- Toggleterm
   use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm")
-  end}
+    require("toggleterm") end
+  }
 
-
-  -- Nvim Tree
+  -- Nvim Tre
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
