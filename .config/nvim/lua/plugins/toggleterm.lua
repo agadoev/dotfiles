@@ -16,7 +16,7 @@ require("toggleterm").setup({
 local map = vim.api.nvim_set_keymap
 
 
-map("", "<leader>tf", ":ToggleTerm direction=float<Cr>", { descr = "Open float terminal" })
+map("", "<leader>tf", ":ToggleTerm direction=float<Cr>", { silent = true })
 map("", "<leader>th", ":ToggleTerm size=10 direction=horizontal<Cr>", { silent = true })
 map("", "<leader>tv", ":ToggleTerm size=80 direction=vertical<Cr>", { silent = true })
 map("", "<F7>", ":ToggleTerm", { silent = true })

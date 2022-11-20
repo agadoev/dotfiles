@@ -1,12 +1,16 @@
 
 local set = vim.opt
 
+-- tabs settings
 set.tabstop = 2
 set.softtabstop = 2
 set.shiftwidth = 2
 set.expandtab = true
 set.smarttab = true
+
 set.ignorecase = true
+
+set.relativenumber = true
 
 -- set leader key
 -- to show cuurent leader :let mapleader
