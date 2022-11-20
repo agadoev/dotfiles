@@ -7,6 +7,8 @@ bash 24-bit-color.sh
 
 npm i -g typescript typescript-language-server
 
+brew install ripgrep # for telescope livegrep
+
 # brew
 # tmux
 # docker
