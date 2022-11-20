@@ -5,6 +5,8 @@ curl -s https://gist.githubusercontent.com/lifepillar/09a44b8cf0f9397465614e6229
 bash 24-bit-color.sh
 # alacritty
 
+npm i -g typescript typescript-language-server
+
 # brew
 # tmux
 # docker
