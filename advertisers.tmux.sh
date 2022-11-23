@@ -1,51 +1,40 @@
 #!/bin/bash
 
-# Session Name
 session="advertisers"
-
-createWindow() {
-	tmux new-window
-	tmux rename-window $1 # 1
-}
 
 tmux new-session -d -s $session
 
-# create frontend window
+set-hook -t $session session-closed killall dotnet && killall node
+
 tmux new-window
-tmux rename-window 'frontend' # 1
+tmux rename-window frontend
 
-# create backend window
 tmux new-window
-tmux rename-window 'backend' # 2
+tmux rename-window backend
 
-# create backend window
-tmux new-window 
-tmux rename-window 'tests' # 3
-
-# create just terminal
 tmux new-window
-tmux rename-window 'just terminal' # 4
+tmux rename-window just-terminal
 
-# create frontend editor
 tmux new-window
-tmux rename-window 'frontend-editor' # 5
+tmux rename-window mongo
 
-# create backend editor
 tmux new-window
-tmux rename-window 'backend-editor' # 6
+tmux rename-window frontend-instance
 
-# create tests editor
 tmux new-window
-tmux rename-window 'tests' # 7
+tmux rename-window backend-instance
 
-tmux send-keys -t 1 C-n 'cd ~/retailrocket/advertisers/frontend && clear && npm run dev' C-m
-tmux send-keys -t 2 C-n 'cd ~/retailrocket/advertisers/backend/Apps/SmartPlacements.Advertisers.Api/ && clear && dotnet run' C-m
-tmux send-keys -t 3 C-n 'cd ~/retailrocket/advertisers/backend/Tests/SmartPlacements.Advertisers.Tests/ && clear' C-m
-tmux send-keys -t 4 C-n 'cd ~/retailrocket/advertisers/ && clear' C-m
-tmux send-keys -t 5 C-n 'cd ~/retailrocket/advertisers/frontend/ && clear && nvim' C-m
-tmux send-keys -t 6 C-n 'cd ~/retailrocket/advertisers/backend/ && clear && nvim' C-m
-tmux send-keys -t 7 C-n 'cd ~/retailrocket/advertisers/backend/Tests/SmartPlacements.Advertisers.Tests/ && clear && nvim' C-m
 
+tmux send-keys -t frontend C-n 'cd ~/retailrocket/advertisers/frontend/ && clear && nvim' C-m
+tmux send-keys -t backend C-n 'cd ~/retailrocket/advertisers/backend/ && clear && nvim' C-m
+tmux send-keys -t mongo C-n 'mongosh mongodb://localhost:27017/advertisers' C-m
+tmux send-keys -t frontend-instance C-n 'cd ~/retailrocket/advertisers/frontend && clear && npm run dev' C-m
+tmux send-keys -t backend-instance C-n 'cd ~/retailrocket/advertisers/backend/Apps/SmartPlacements.Advertisers.Api/ && clear && dotnet run' C-m
+
+
+tmux join-pane -h -s frontend-instance -t backend-instance
+
+tmux rename-window instances
 
 # destroy default 0 window
 tmux kill-window -t 0
