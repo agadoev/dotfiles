@@ -2,6 +2,11 @@
 
 session="advertisers"
 
+docker stop $(docker ps -aq)
+
+docker start test-mongo
+
+
 tmux new-session -d -s $session
 
 set-hook -t $session session-closed killall dotnet && killall node

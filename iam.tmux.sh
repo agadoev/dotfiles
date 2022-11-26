@@ -1,6 +1,13 @@
 
 session="iam"
 
+docker stop $(docker ps -aq)
+
+cd ~/retailrocket/iam/_deploy/iam-local/
+
+./deps.sh
+
+
 goTo() {
 	base_path="~/retailrocket/iam"
 
@@ -13,6 +20,8 @@ createWindow() {
 }
 
 tmux new-session -d -s $session
+
+set-hook -t $session 'session-closed' 'killall dotnet && killall node'
 
 createWindow "backend"
 createWindow "frontend"
